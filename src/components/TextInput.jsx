@@ -8,37 +8,39 @@ export default function FormInput({
 	inputWidth,
 }) {
 	const [input, setInput] = useState('');
-	console.log('input:', input);
 	const [errMsg, setErrMsg] = useState('');
-	const hasErrMsg = errMsg ? 'opacity-100' : 'opacity-0';
 
-	const numberRegex = /^\d+$/;
+	const onChangeParameter = name.includes('number')
+		? handleNumberChange
+		: handleTextChange;
 
-	function handleOnChange(e) {
-		if (name === 'cc-number' || name === 'cvc-number') {
-			return validateNumber(e.target.value);
-		}
-
+	function handleTextChange(e) {
 		return setInput(e.target.value);
 	}
 
-	function validateNumber(value) {
+	function handleNumberChange(e) {
+		const numberRegex = /^\d+$/;
+		const value = e.target.value;
+		setErrMsg('');
+
 		if (!numberRegex.test(value)) {
-			return setErrMsg('not number');
+			return setErrMsg('not a number');
 		}
+
+		return setInput(value);
 	}
 
 	return (
-		<div className='flex flex-col relative pb-6'>
+		<div className='flex flex-col relative'>
 			<label>{label}</label>
 			<input
 				placeholder={placeholder}
 				type={type}
 				name={name}
 				className={`w-${inputWidth}`}
-				onChange={handleOnChange}
+				onChange={onChangeParameter}
 			/>
-			<p className={`${hasErrMsg} absolute bottom-0`}>
+			<p className={`${errMsg ? 'opacity-100' : 'opacity-0'}`}>
 				{errMsg ? errMsg : 'placeholder'}
 			</p>
 		</div>
