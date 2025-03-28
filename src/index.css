@@ -1,1 +1,18 @@
 @import 'tailwindcss';
+
+@layer base {
+	html,
+	body,
+	#root {
+		@apply h-full w-full flex;
+	}
+}
+
+@layer components {
+	input {
+		@apply grow bg-red-300;
+	}
+}
+
+@layer theme {
+}
