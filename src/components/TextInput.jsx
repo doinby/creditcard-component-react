@@ -6,28 +6,12 @@ export default function FormInput({
 	type = 'text',
 	name = 'input',
 	inputWidth,
+	setData,
 }) {
-	const [input, setInput] = useState('');
 	const [errMsg, setErrMsg] = useState('');
 
-	const onChangeParameter = name.includes('number')
-		? handleNumberChange
-		: handleTextChange;
-
-	function handleTextChange(e) {
-		return setInput(e.target.value);
-	}
-
-	function handleNumberChange(e) {
-		const numberRegex = /^\d+$/;
-		const value = e.target.value;
-		setErrMsg('');
-
-		if (!numberRegex.test(value)) {
-			return setErrMsg('not a number');
-		}
-
-		return setInput(value);
+	function handleChange(e) {
+		return setData(e.target.value);
 	}
 
 	return (
@@ -38,9 +22,10 @@ export default function FormInput({
 				type={type}
 				name={name}
 				className={`w-${inputWidth}`}
-				onChange={onChangeParameter}
+				onChange={handleChange}
+				required
 			/>
-			<p className={`${errMsg ? 'opacity-100' : 'opacity-0'}`}>
+			<p className={`${errMsg ? 'opacity-100' : 'opacity-0'} text-red-400`}>
 				{errMsg ? errMsg : 'placeholder'}
 			</p>
 		</div>

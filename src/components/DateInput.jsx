@@ -1,48 +1,39 @@
 import { useState } from 'react';
 
-export default function DateInput() {
-	const [monthInput, setMonthInput] = useState('');
-	const [yearInput, setYearInput] = useState('');
+export default function DateInput({ setData = '00/00' }) {
+	const [monthInput, setMonthInput] = useState(0);
+	// console.log('monthInput:', monthInput);
+	const [yearInput, setYearInput] = useState(0);
 	const [errMsg, setErrMsg] = useState('');
 
 	function handleMonthChange(e) {
-		const numberRegex = /^\d+$/;
-		const value = e.target.value;
-		setErrMsg('');
-
-		if (!numberRegex.test(value)) {
-			return setErrMsg('not a number');
-		}
-
-		return setMonthInput(value);
+		return setMonthInput(e.target.value);
 	}
 
 	function handleYearChange(e) {
-		const numberRegex = /^\d+$/;
-		const value = e.target.value;
-		setErrMsg('');
-
-		if (!numberRegex.test(value)) {
-			return setErrMsg('not a number');
-		}
-
-		return setYearInput(value);
+		return setYearInput(e.target.value);
 	}
 
 	return (
 		<div className='grid grid-cols-2'>
 			<label className='col-span-2'>EXP. Date (MM/YY)</label>
 			<input
-				// type='number'
+				type='number'
 				name='month'
+				min='1'
+				max='12'
 				className='w-16'
 				onChange={handleMonthChange}
+				required
 			/>
 			<input
-				// type='number'
+				type='number'
 				name='year'
+				min='1000'
+				max='2500'
 				className='w-16'
 				onChange={handleYearChange}
+				required
 			/>
 			<p className={`${errMsg ? 'opacity-100' : 'opacity-0'} col-span-2`}>
 				{errMsg ? errMsg : 'placeholder'}
