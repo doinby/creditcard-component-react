@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function DateInput({ setData = '00/00' }) {
+export default function DateInput({ setData = '' }) {
 	const [monthInput, setMonthInput] = useState(0);
 	// console.log('monthInput:', monthInput);
 	const [yearInput, setYearInput] = useState(0);

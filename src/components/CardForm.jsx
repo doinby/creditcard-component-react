@@ -1,12 +1,19 @@
 import TextInput from './TextInput';
 import DateInput from './DateInput';
-import { useState } from 'react';
 
-export default function CardForm() {
-	const [name, setName] = useState('');
-	const [ccNumber, setCcNumber] = useState(0);
-	const [cvcNumber, setCvcNumber] = useState(0);
-	const [expData, setExpDate] = useState('');
+// Todo: Validate CC number - number & space only
+// w/ limit to x number of characters
+
+export default function CardForm({
+	setName = 0,
+	setCcNumber = '',
+	setExpDate = '',
+	setCvcNumber = 0,
+}) {
+	// const [name, setName] = useState('');
+	// const [ccNumber, setCcNumber] = useState(0);
+	// const [cvcNumber, setCvcNumber] = useState(0);
+	// const [expData, setExpDate] = useState('');
 
 	return (
 		<form className='w-full flex flex-col gap-8 justify-center items-center'>
@@ -21,7 +28,7 @@ export default function CardForm() {
 				<TextInput
 					label='Card Number'
 					placeholder=''
-					type='number'
+					// type='number'
 					name='cc-number'
 					setData={setCcNumber}
 				/>
