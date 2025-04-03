@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
 @import 'tailwindcss';
 
 @layer base {
@@ -10,9 +11,15 @@
 
 @layer components {
 	input {
-		@apply grow bg-red-300;
+		@apply bg-red-300;
 	}
 }
 
-@layer theme {
+@theme {
+	--font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif,
+		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	--color-error: hsl(0, 100%, 66%);
+	--color-secondary-light: hsl(270, 3%, 87%);
+	--color-secondary-dark: hsl(279, 6%, 55%);
+	--color-secondary-darkest: hsl(278, 68%, 11%);
 }
